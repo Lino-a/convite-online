@@ -1,0 +1,139 @@
+<!-- Desenvolvedor @_d.lino -->
+
+<!DOCTYPE html>
+<html lang="pt-br" class="animated-bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <title>Niver da Pelora ❤️</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body class="animated-bg">
+
+    <div class="center">
+        <div>
+            <img src="image/banner.jpg" alt="">
+        </div>
+
+        <center>
+            <div id="countdown">
+                <div id="days" class="box"></div>
+                <div id="hours" class="box"></div>
+                <div id="minutes" class="box"></div>
+                <div id="seconds" class="box"></div>
+            </div>
+        </center>
+
+        <div class="info_evento">
+            <h1 style="text-align: center; font-size: 42px;" class="merriweather-light">Festa das Cores</h1><br>
+            <h2 style="text-align: center;" class="bebas-neue-regular">Sáb 02/03/24 (Às 10h)</h2>
+                <div style="display: flex; align-items: center; margin-bottom: -20px; border-top: 1px solid rgb(126, 126, 126); padding-top: 0px; margin-top: 10px;">
+                    <img src="image/icon_png/prato.png" style="height: 60px; width: 60px;">
+                    <h2 style="margin-left: 10px; color: rgb(228, 0, 152); margin-top: 15px;" class="bebas-neue-regular">Levar comida e bebida na cor sorteada.</h2>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <img src="image/icon_png/camiseta.png" style="height: 60px; width: 60px;">
+                    <h2 style="margin-left: 10px; color: rgb(228, 0, 152); margin-top: 20px;" class="bebas-neue-regular">Vestir-se na cor sorteada.</h2>
+                </div>
+            <h3 class="bebas-neue-regular" style="margin-bottom: 5px; color: #5a5a5a; text-align: center; margin-top: 5px; border-top: 1px solid rgb(126, 126, 126); padding-top: 10px; border-bottom: 1px solid rgb(126, 126, 126); padding-bottom: 5px;" >Local: Parque quinta da boa vista - São Cristovão.</h3>
+            <div id="mapid"></div>
+        </div>
+
+        <div class="btn_confirmar" id="container_btn_confirmar_presenca"><button class="merriweather-light" id="btn_confirmar_presenca">Confirmar Presença</button></div>
+
+        <div class="container_form" id="container_form">
+            <form action="/submit-form" method="POST" id="form">
+                <input type="text" name="nome" id="nome" placeholder="Nome">
+                <div style="margin: 10px;">
+                    <select id="parentesco" name="parentesco">
+                        <option value="">Parentesco</option>
+                        <option value="Pai">Pai</option>
+                        <option value="Mãe">Mãe</option>
+                        <option value="Tio">Tio</option>
+                        <option value="Tia">Tia</option>
+                        <option value="Avô">Avô</option>
+                        <option value="Avó">Avó</option>
+                        <option value="Dindo">Dindo</option>
+                        <option value="Dinda">Dinda</option>
+                        <option value="Amigo(A)">Amigo(A)</option>
+                    </select>
+                </div>
+
+                <div style="margin: 10px;">
+                    <select id="cor" name="cor">
+                        <option value="">Cor</option>
+                        <option value="Branco">Branco</option>
+                        <option value="Preto">Preto</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Roxo">Roxo</option>
+                        <option value="Vermelho">Vermelho</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Amarelo">Amarelo</option>
+                        <option value="Laranja">Laranja</option>
+                    </select>
+                </div>
+                <textarea 
+                    id="comidas" 
+                    name="comidas" 
+                    rows="4" 
+                    style="width: 310px;
+                        margin: 5px auto 15px auto;
+                        padding: 10px; font-size:
+                        14px;outline: none;
+                        border: none;"
+                    placeholder="Comidas"
+                    cols="50"></textarea>
+                <textarea 
+                id="bebidas" 
+                name="bebidas" 
+                rows="4" 
+                style="width: 310px; 
+                    margin: 0 auto; 
+                    padding: 10px; 
+                    font-size: 14px; 
+                    outline: none; 
+                    border: none;" 
+                    placeholder="Bebidas" 
+                    cols="50"></textarea>
+                <input type="submit" class="btn_salvar_info merriweather-light" value="Salvar">
+            </form> <!-- Form -->
+        </div> <!-- Container Form -->
+
+
+
+        <div class="container_table merriweather-light" id="tabela">
+            <table id="tabelaPessoas">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Parentesco</th>
+                        <th>Cor</th>
+                        <th>Comida</th>
+                        <th>Bebida</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="assets/script.js"></script>
+
+</body>
+</html>
